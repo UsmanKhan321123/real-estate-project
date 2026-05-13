@@ -1,4 +1,5 @@
 import { hash, compare } from "bcrypt";
+import prisma from "../lib/prisma.js";
 
 export let signup = async (req, res) => {
   let { username, email, password } = req.body;
@@ -8,14 +9,23 @@ export let signup = async (req, res) => {
     });
   }
   let hashPassword = await hash(password, 10);
-  let newUSer = await prisma.user.create({
-    username,
-    email,
-    password: hashPassword,
+  let newUser = await prisma.user.create({
+    data: {
+      username,
+      email,
+      password: hashPassword,
+    },
+  });
+  res.json({
+    message: "successfully done",
+    body: newUser,
   });
 };
-export let login = (req, res) => {
-  console.log(req.body);
+export let login = async (req, res) => {
+  let { username, password } = req.body;
+  let user = await prisma.user.findUnique({
+    where: { username },
+  });
 };
 export let logout = (req, res) => {
   console.log(req.body);
