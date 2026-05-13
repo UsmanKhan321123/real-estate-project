@@ -1,19 +1,19 @@
 import express from "express";
 let postRouter = express.Router();
 
-postRouter.get("/post", (req, res) => {
-  console.log("");
+postRouter.get("/", (req, res) => {
+  // console.log("hi");
 });
 
 postRouter.post("/post", (req, res) => {
-  console.log("");
+  // console.log("hi");
 });
 
 postRouter.put("/post", (req, res) => {
-  console.log("");
+  // console.log("hi");
 });
 postRouter.delete("/post", (req, res) => {
-  console.log("");
+  // console.log("hi");
 });
 
 export default postRouter;
