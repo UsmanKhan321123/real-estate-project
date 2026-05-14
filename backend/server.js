@@ -1,6 +1,7 @@
 import express from "express";
 import "dotenv/config";
 import morgan from "morgan";
+import cookieParser from "cookie-parser";
 import authRouter from "./routes/authRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 import postRouter from "./routes/postRoutes.js";
@@ -8,6 +9,7 @@ import postRouter from "./routes/postRoutes.js";
 let app = express();
 let port = process.env.PORT || 5001;
 app.use(express.json());
+app.use(cookieParser())
 app.use(morgan("combined"));
 
 
