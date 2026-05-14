@@ -5,18 +5,25 @@ import { Link } from "react-router-dom";
 function Navbar() {
   const [open, setOpen] = useState(false);
 
-  const user = true;
+  const user = false;
   return (
     <nav>
       <div className="left">
         <a href="/" className="logo">
           <img src="/logo.png" alt="" />
-          <span>LamaEstate</span>
+          <span>My Real Estate</span>
         </a>
-        <a href="/">Home</a>
-        <a href="/">About</a>
-        <a href="/">Contact</a>
-        <a href="/">Agents</a>
+        {/* <a href="/">Home</a> */}
+        <Link to="/">Home</Link>
+        {/* <a href="/">About</a> */}
+        <Link to="/">About</Link>
+
+        {/* <a href="/">Contact</a> */}
+        <Link to="/">Contact</Link>
+
+        {/* <a href="/">Agents</a> */}
+        <Link to="/">Agents</Link>
+
       </div>
       <div className="right">
         {user ? (
@@ -33,10 +40,14 @@ function Navbar() {
           </div>
         ) : (
           <>
-            <a href="/">Sign in</a>
-            <a href="/" className="register">
+            {/* <a href="/login">Sign in</a> */}
+        <Link to="/login">Sign in</Link>
+{/* 
+            <a href="/register" className="register">
               Sign up
-            </a>
+            </a> */}
+        <Link to="/register">Sign up</Link>
+
           </>
         )}
         <div className="menuIcon">
@@ -47,12 +58,24 @@ function Navbar() {
           />
         </div>
         <div className={open ? "menu active" : "menu"}>
-          <a href="/">Home</a>
-          <a href="/">About</a>
-          <a href="/">Contact</a>
-          <a href="/">Agents</a>
-          <a href="/">Sign in</a>
-          <a href="/">Sign up</a>
+          {/* <a href="/">Home</a> */}
+        <Link to="/">Home</Link>
+
+          {/* <a href="/">About</a> */}
+        <Link to="/">About</Link>
+
+          {/* <a href="/">Contact</a> */}
+        <Link to="/">Contact</Link>
+
+          {/* <a href="/">Agents</a> */}
+        <Link to="/">Agents</Link>
+
+          {/* <a href="../../routes/login/login.jsx">Sign in</a> */}
+        <Link to="/">Sign in</Link>
+
+          {/* <a href="../../routes/register/register.jsx">Sign up</a> */}
+        <Link to="/register">Sign up</Link>
+
         </div>
       </div>
     </nav>

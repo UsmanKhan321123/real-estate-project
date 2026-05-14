@@ -1,4 +1,5 @@
-@import "../../responsive.scss";
+@use "../../responsive.scss" as *;
+
 
 .card {
   display: flex;
