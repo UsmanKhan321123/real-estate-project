@@ -1,15 +1,37 @@
+import axios from "axios";
 import "./login.scss";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 function Login() {
+  let [error, setError] = useState();
+  let navigate = useNavigate();
+  let handleSubmit = async (e) => {
+    e.preventDefault();
+    let formData = new FormData(e.target);
+    let username = formData.get("username");
+    let password = formData.get("password");
+    try {
+      let res = await axios.post("http://localhost:5000/auth/login", {
+        username,
+        password,
+      });
+      console.log(res.data);
+
+      // navigate("/")
+    } catch (error) {
+      setError(error.response.data.message);
+    }
+  };
   return (
     <div className="login">
       <div className="formContainer">
-        <form>
+        <form onSubmit={handleSubmit}>
           <h1>Welcome back</h1>
           <input name="username" type="text" placeholder="Username" />
           <input name="password" type="password" placeholder="Password" />
           <button>Login</button>
+          {error && <span>{error}</span>}
           <Link to="/register">{"Don't"} you have an account?</Link>
         </form>
       </div>

@@ -5,7 +5,7 @@ import prisma from "../lib/prisma.js";
 export let signup = async (req, res) => {
   let { username, email, password } = req.body;
   if (!username || !email || !password) {
-    res.json({
+    return res.json({
       messgae: "Please provide all fields",
     });
   }
@@ -29,21 +29,19 @@ export let login = async (req, res) => {
       where: { username },
     });
     if (!user) {
-      res.status(400).json({
+      return res.status(400).json({
         message: "Invalid Credentials",
       });
     }
     let isValidPassword = await compare(password, user.password);
     if (!isValidPassword) {
-      {
-        res.status(400).json({
-          message: "Please Enter Correct Password",
-        });
-      }
+      return res.status(400).json({
+        message: "Please Enter Correct Password",
+      });
     }
 
-    let token =await jwt.sign(
-      { id: user._id ,  role: "user" },
+    let token = await jwt.sign(
+      { id: user.id, role: "user" },
       process.env.JWT_SECRET,
       {
         expiresIn: "7d",
@@ -59,10 +57,10 @@ export let login = async (req, res) => {
       .status(200)
       .json("login Successfully");
   } catch (error) {
-    res.json({ message: "Invalid Credetials" });
+    return res.json({ message: "Invalid Crede" });
   }
 };
 
 export let logout = (req, res) => {
-res.clearCookie("Token").status(200).json("User Logout Successfully")
+  res.clearCookie("Token").status(200).json("User Logout Successfully");
 };
