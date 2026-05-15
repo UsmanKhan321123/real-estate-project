@@ -39,6 +39,7 @@ export let login = async (req, res) => {
         message: "Please Enter Correct Password",
       });
     }
+    let {password:userPassword,...userInfo} = user
 
     let token = await jwt.sign(
       { id: user.id, role: "user" },
@@ -55,9 +56,9 @@ export let login = async (req, res) => {
         maxAge: 1000 * 60 * 60 * 24 * 7,
       })
       .status(200)
-      .json("login Successfully");
+      .json(userInfo);
   } catch (error) {
-    return res.json({ message: "Invalid Crede" });
+    return res.json({ message: "Invalid Credentials" });
   }
 };
 
