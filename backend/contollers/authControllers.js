@@ -42,7 +42,7 @@ export let login = async (req, res) => {
     let {password:userPassword,...userInfo} = user
 
     let token = await jwt.sign(
-      { id: user.id, role: "user" },
+      { id: user.id, isAdmin: true },
       process.env.JWT_SECRET,
       {
         expiresIn: "7d",

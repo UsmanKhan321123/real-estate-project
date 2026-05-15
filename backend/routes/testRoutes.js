@@ -3,8 +3,11 @@ import {
   test,
   shouldBeAdmin,
   shouldBeLoggedIn,
-} from "../contollers/testControllers";
+} from "../contollers/testControllers.js";
+import verifyToken from "../middleware/verifyToken.js";
 let testRouter = express.Router();
 
-testRouter.get("/shouldBeLoggedIn", shouldBeLoggedIn);
-testRouter.get("/shouldBeAdmin", shouldBeAdmin);
+testRouter.get("/shouldBeLoggedIn",verifyToken, shouldBeLoggedIn);
+testRouter.get("/shouldBeAdmin",verifyToken, shouldBeAdmin);
+
+export default testRouter

@@ -6,7 +6,7 @@ import cookieParser from "cookie-parser";
 import authRouter from "./routes/authRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 import postRouter from "./routes/postRoutes.js";
-import testRouer from "./routes/testRoutes.js"
+import testRouter from "./routes/testRoutes.js"
 
 let app = express();
 let port = process.env.PORT || 5001;
