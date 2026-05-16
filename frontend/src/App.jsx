@@ -7,7 +7,7 @@ import ProfilePage from "./routes/profilePage/profilePage";
 import Login from "./routes/login/login";
 import Register from "./routes/register/register";
 import ProfileUpdatePage from "./routes/profileUpdatePage/profileUpdatePage";
-
+// import UploadWidget from "./components/uploadWidget/UploadWidget";
 function App() {
   const router = createBrowserRouter([
     {
@@ -64,7 +64,8 @@ function App() {
     },
   ]);
 
-  return <RouterProvider router={router} />;
-}
+  return<> <RouterProvider router={router} />;
+  {/* <UploadWidget /> */}
+</>}
 
 export default App;

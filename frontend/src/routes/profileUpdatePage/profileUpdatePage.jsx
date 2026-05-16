@@ -3,6 +3,7 @@ import "./profileUpdatePage.scss";
 import { AurhContext } from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
 import apiRequest from "../../lib/apiRequest";
+import UploadWidget from "../../components/uploadWidget/UploadWidget";
 
 function ProfileUpdatePage() {
   let { currentUser, updateUser } = useContext(AurhContext);
@@ -70,6 +71,7 @@ function ProfileUpdatePage() {
         <div className="sideContainer">
           <img src={currentUser?.avatar} alt="avatar" className="avatar" />
         </div>
+        {/* <><UploadWidget/></> */}
       </div>
     )
   );
