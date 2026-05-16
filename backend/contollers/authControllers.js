@@ -28,6 +28,8 @@ export let login = async (req, res) => {
     let user = await prisma.user.findUnique({
       where: { username },
     });
+    console.log(user);
+    
     if (!user) {
       return res.status(400).json({
         message: "Invalid Credentials",
@@ -58,7 +60,7 @@ export let login = async (req, res) => {
       .status(200)
       .json(userInfo);
   } catch (error) {
-    return res.json({ message: "Invalid Credentials" });
+    return res.json({ message: "Invalid Credential" });
   }
 };
 

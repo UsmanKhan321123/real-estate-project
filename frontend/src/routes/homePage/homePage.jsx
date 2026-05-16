@@ -1,7 +1,12 @@
+import { useContext } from "react";
 import SearchBar from "../../components/searchBar/SearchBar";
 import "./homePage.scss";
+import { AurhContext } from "../../context/authContext.jsx";
 
 function HomePage() {
+  let {currentUser, updateUser}  =useContext(AurhContext);
+  console.log(currentUser);
+  
   return (
     <div className="homePage">
       <div className="textContainer">

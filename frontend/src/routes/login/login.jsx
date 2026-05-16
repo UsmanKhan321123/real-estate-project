@@ -2,11 +2,13 @@ import axios from "axios";
 import "./login.scss";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import apiRequest from "../../lib/apiRequest";
+import { AurhContext } from "../../context/authContext";
 function Login() {
   let [error, setError] = useState();
   let navigate = useNavigate();
+  let { currentUser, updateUser } = useContext(AurhContext);
   let handleSubmit = async (e) => {
     e.preventDefault();
     let formData = new FormData(e.target);
@@ -18,11 +20,11 @@ function Login() {
         password,
       });
       console.log(res.data);
-      
-      localStorage.setItem("userData", JSON.stringify(res.data));
-      navigate("/");
+      updateUser(res.data);
+      // localStorage.setItem("userData", JSON.stringify(res.data));
+      navigate("/profile");
     } catch (error) {
-      setError(error.response.data.message);
+      setError(error?.response?.data?.message || error.message);
     }
   };
   return (
