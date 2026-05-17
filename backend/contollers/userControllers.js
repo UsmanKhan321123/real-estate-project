@@ -134,3 +134,4 @@ let deleteUser = async (req, res) => {
 };
 
 export { getUser, getUsers, updateUser, deleteUser };
+  
