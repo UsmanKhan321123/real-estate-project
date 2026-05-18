@@ -10,11 +10,11 @@ let verifyToken = (req, res, next) => {
       return res.json({ message: "Token not verified" });
     }
     req.userId = payload.id;
-    console.log(req.userId);
+    // console.log("From verify.js",req.userId);
     
     next();
   });
-  // return res.json({ message: "You are Authenticated  " });
+
 };
 
 export default verifyToken

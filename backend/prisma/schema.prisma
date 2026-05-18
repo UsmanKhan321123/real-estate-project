@@ -22,7 +22,7 @@ model Post {
     id String @id @default(auto()) @map("_id") @db.ObjectId
     title String
     price Int
-    img String?
+    img String? @default("https://cdn.pixabay.com/photo/2024/07/13/07/40/cars-8891625_1280.jpg")
     address String
     city String
     bedroom Int
