@@ -1,54 +1,47 @@
 import { useContext, useState } from "react";
 import "./navbar.scss";
 import { Link } from "react-router-dom";
-import { AurhContext } from "../../context/authContext";
+import { AuthContext } from "../../context/AuthContext";
+import { useNotificationStore } from "../../lib/notificationStore";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
-  let {currentUser} = useContext(AurhContext)
-  // const user = false;
+
+  const { currentUser } = useContext(AuthContext);
+
+  const fetch = useNotificationStore((state) => state.fetch);
+  const number = useNotificationStore((state) => state.number);
+
+  if(currentUser) fetch();
+
   return (
     <nav>
       <div className="left">
         <a href="/" className="logo">
           <img src="/logo.png" alt="" />
-          <span>My Real Estate</span>
+          <span>LamaEstate</span>
         </a>
-        {/* <a href="/">Home</a> */}
-        <Link to="/">Home</Link>
-        {/* <a href="/">About</a> */}
-        <Link to="/">About</Link>
-
-        {/* <a href="/">Contact</a> */}
-        <Link to="/">Contact</Link>
-
-        {/* <a href="/">Agents</a> */}
-        <Link to="/">Agents</Link>
-
+        <a href="/">Home</a>
+        <a href="/">About</a>
+        <a href="/">Contact</a>
+        <a href="/">Agents</a>
       </div>
       <div className="right">
         {currentUser ? (
           <div className="user">
-            <img
-              src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-              alt=""
-            />
+            <img src={currentUser.avatar || "/noavatar.jpg"} alt="" />
             <span>{currentUser.username}</span>
             <Link to="/profile" className="profile">
-              <div className="notification">3</div>
+              {number > 0 && <div className="notification">{number}</div>}
               <span>Profile</span>
             </Link>
           </div>
         ) : (
           <>
-            {/* <a href="/login">Sign in</a> */}
-        <Link to="/login">Sign in</Link>
-{/* 
+            <a href="/login">Sign in</a>
             <a href="/register" className="register">
               Sign up
-            </a> */}
-        <Link to="/register">Sign up</Link>
-
+            </a>
           </>
         )}
         <div className="menuIcon">
@@ -59,24 +52,12 @@ function Navbar() {
           />
         </div>
         <div className={open ? "menu active" : "menu"}>
-          {/* <a href="/">Home</a> */}
-        <Link to="/">Home</Link>
-
-          {/* <a href="/">About</a> */}
-        <Link to="/">About</Link>
-
-          {/* <a href="/">Contact</a> */}
-        <Link to="/">Contact</Link>
-
-          {/* <a href="/">Agents</a> */}
-        <Link to="/">Agents</Link>
-
-          {/* <a href="../../routes/login/login.jsx">Sign in</a> */}
-        <Link to="/">Sign in</Link>
-
-          {/* <a href="../../routes/register/register.jsx">Sign up</a> */}
-        <Link to="/register">Sign up</Link>
-
+          <a href="/">Home</a>
+          <a href="/">About</a>
+          <a href="/">Contact</a>
+          <a href="/">Agents</a>
+          <a href="/">Sign in</a>
+          <a href="/">Sign up</a>
         </div>
       </div>
     </nav>

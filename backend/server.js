@@ -7,6 +7,10 @@ import authRouter from "./routes/authRoutes.js";
 import userRouter from "./routes/userRoutes.js";
 import postRouter from "./routes/postRoutes.js";
 import testRouter from "./routes/testRoutes.js"
+import chatRouter from "./routes/chatRoutes.js";
+import messageRouter from "./routes/messageRoutes.js";
+
+
 
 let app = express();
 let port = process.env.PORT || 5001;
@@ -25,6 +29,12 @@ app.use("/user", userRouter);
 app.use("/post", postRouter);
 app.use("/test", testRouter);
 app.use("/users", userRouter);
+app.use("/api/chats", chatRouter);
+app.use("/api/messages", messageRouter);
+
+
+
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

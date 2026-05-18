@@ -16,6 +16,15 @@ let getPost = async (req, res) => {
   try {
     let post = await prisma.post.findUnique({
       where: { id: postId },
+      include :{
+        postDetails: true,
+        user: {
+          select: {
+            username: true,
+            avatar: true,
+          },
+        }
+      }
     });
     if (!post) res.json({ message: "Post Doen not exist" });
     return res.json({ message: "Successfully find the post", post });
@@ -34,7 +43,11 @@ let addPost = async (req, res) => {
   }
   try {
     let createdPost = await prisma.post.create({
-      data: { ...body, userId: TokenId },
+      data: {
+        ...body.postData,
+        userId: TokenId,
+        postDetails: { create: body.postDetails },
+      },
     });
     console.log(createdPost);
 
@@ -56,7 +69,7 @@ let deletePost = async (req, res) => {
     if (!post) {
       return res.json({ message: "post Does not Exist" });
     }
-    if (post.id != userTokenid) {
+    if (post.userId != userTokenid) {
       return res.json({ message: "user is not authorized" });
     }
 
@@ -88,7 +101,7 @@ let updatePost = async (req, res) => {
       where: { id: postId },
       data: { ...body },
     });
-    return res.json({ message: "Post Successfully updated", updatePost });
+    return res.json({ message: "Post Successfully updated", updatedPost });
   } catch (error) {
     return res.json({ message: "Failed to update the post" });
   }
